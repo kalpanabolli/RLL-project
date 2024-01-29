@@ -1,0 +1,45 @@
+﻿@model PROD.Models.CarModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div style="display: flex; justify-content: space-between;">
+    <div style="flex: 1;">
+        <table class="table">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.CarName)</th>
+                <td>@Html.DisplayFor(model => model.CarName)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Available)</th>
+                <td>@Html.DisplayFor(model => model.Available)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.PerDayCharge)</th>
+                <td>@Html.DisplayFor(model => model.PerDayCharge)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.ChargePerKm)</th>
+                <td>@Html.DisplayFor(model => model.ChargePerKm)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.CarType)</th>
+                <td>@Html.DisplayFor(model => model.CarType)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Photo)</th>
+                <td>@Html.DisplayFor(model => model.Photo)</td>
+            </tr>
+        </table>
+        <p>
+            @Html.ActionLink("Edit", "Edit", null, new { id = Model.CarID }, new { @class = "btn btn-primary btn-large" }) |
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn-large" })
+        </p>
+    </div>
+    <div style="flex: 1; margin-right: 20px;">       
+        <img src="@Url.Content(ViewBag.ImagePath)" alt="Card image" width="400px" height="300px">
+    </div>
+</div>

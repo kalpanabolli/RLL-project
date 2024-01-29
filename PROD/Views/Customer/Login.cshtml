@@ -1,0 +1,158 @@
+﻿@model PROD.Models.CustomerModel
+
+@{
+    ViewBag.Title = "Login";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href=" ~/Content/LoginStyle1.css " rel=" stylesheet" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#refreshCaptcha').click(function () {
+                $.get("/Customer/GenerateCaptcha", function (data) {
+                    $("#captchaValue").text("CAPTCHA: " + data);
+                });
+            });
+        });
+
+        $(document).ready(function () {
+            var $modal = $("#notRegisteredModal");
+            var $closeBtn = $(".close-button");
+
+            $closeBtn.on("click", function () {
+                $modal.hide();
+            });
+
+            $(window).on("click", function (event) {
+                if ($(event.target).is($modal)) {
+                    $modal.hide();
+                }
+            });
+        });      
+    </script>
+
+
+    <style>
+        
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 70vh; 
+        }
+
+        .login-card {
+            width: 600px; 
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 5px;
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    
+        <div class="login-container" style="margin-top:130px;margin-bottom:30px">
+            <div class="login-card">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <center>
+                        <h4>Customer Login</h4>
+                    </center>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "enter email" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "enter password" } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <!-- CAPTCHA -->
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            @Html.Label("CAPTCHA", new { @class = "control-label" })
+                        </div>
+                        <div class="col-md-10">
+                            @Html.TextBox("CaptchaInput", null, new { @class = "form-control" })
+                            <p id="captchaValue">CAPTCHA: @Session["Captcha"]</p>
+                            @if (!string.IsNullOrEmpty(ViewBag.CaptchaError))
+                            {
+                                <span class="text-danger">@ViewBag.CaptchaError</span>
+                            }
+                        </div>
+                    </div>
+                   
+                    <!-- Login Button -->
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Login" class="btn btn-success" />
+                            <p style="color:red">@ViewBag.Message</p>
+                        </div>
+                        <p>
+                            @Html.ActionLink("Forgot Password?", "forgotpassword")
+                            &nbsp;&nbsp;&nbsp;
+                            Don't have an account? &nbsp;&nbsp;
+                            @Html.ActionLink("Register Here", "Register", null, new { @class = "btn btn-primary" })
+                        </p>
+                    </div>
+
+                    <div id="notRegisteredModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close-button">&times;</span>
+                            <h2>You're not registered!</h2>
+                            <p>Please sign up to continue.</p>
+                            <a href="@Url.Action("Register", "Customer")" class="btn btn-primary">Register</a>
+                        </div>
+                    </div>
+
+
+                    @if (ViewBag.NotRegistered == true)
+                    {
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                                $('#notRegisteredModal').show();
+                            });
+                        </script>
+                    }
+                    @if (ViewBag.IncorrectPassword == true)
+                    {
+                        <span class="text-danger">Incorrect password, please try again.</span>
+                    }                  
+
+
+
+                </div>
+
+                }
+            </div>
+        </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+
+</body>
+</html>

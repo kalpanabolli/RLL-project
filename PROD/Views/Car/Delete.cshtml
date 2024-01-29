@@ -1,0 +1,49 @@
+﻿@model PROD.Models.CarModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>CarModel</h4>
+    <hr />
+    <table class="table">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.CarName)</th>
+            <td>@Html.DisplayFor(model => model.CarName)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Available)</th>
+            <td>@Html.DisplayFor(model => model.Available)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.PerDayCharge)</th>
+            <td>@Html.DisplayFor(model => model.PerDayCharge)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.ChargePerKm)</th>
+            <td>@Html.DisplayFor(model => model.ChargePerKm)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.CarType)</th>
+            <td>@Html.DisplayFor(model => model.CarType)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Photo)</th>
+            <td>@Html.DisplayFor(model => model.Photo)</td>
+        </tr>
+    </table>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Remove" class="btn btn-danger " /> |
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info btn-large" })
+        </div>
+    }
+</div>

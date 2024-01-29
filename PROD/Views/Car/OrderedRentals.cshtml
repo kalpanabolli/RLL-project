@@ -1,0 +1,66 @@
+﻿@model IEnumerable<PROD.Models.RentModel>
+
+@{
+    ViewBag.Title = "OrderedRentals";
+}
+
+<h2>OrderedRentals</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CarID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RentOrderDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReturnDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OdoReading)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReturnOdoReading)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LicenseNumber)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CarID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RentOrderDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReturnDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OdoReading)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReturnOdoReading)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LicenseNumber)
+        </td>
+       
+    </tr>
+}
+
+</table>
+
+<div>
+    @Html.ActionLink("Customer List", "EmpIndex", null, new { @class = "btn btn-primary" })
+</div>

@@ -1,0 +1,112 @@
+﻿@model PROD.Models.CustomerModel
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(document).click(function (event) {
+                var target = $(event.target);
+                if (!target.closest('.alert').length) {
+                    $(".alert").alert('close');
+                }
+            });
+        });
+
+    </script>
+</head>
+<body>
+    
+    <h2 style="margin-top:86px;font-size:8mm">@ViewBag.Title</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal" style="margin-top:-8px">
+
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">
+                    @Html.Label("CAPTCHA", new { @class = "control-label" })
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBox("CaptchaInput", null, new { @class = "form-control" })
+                    <p id="captchaValue">CAPTCHA: @Session["Captcha"]</p>
+                </div>
+            </div>
+            <div>
+                @if (!string.IsNullOrEmpty(ViewBag.Error))
+                {
+                    <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                        @ViewBag.Error
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                }
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Register" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        <p>
+            Already have an account?
+            @Html.ActionLink("Login here", "Login", null, new { @class = "btn btn-info btn-large" })
+        </p>
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</body>
+</html>

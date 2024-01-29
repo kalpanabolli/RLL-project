@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CarRentalEntitiesModelStoreContainer" CdmEntityContainer="CarRentalEntities">
+    <EntitySetMapping Name="admins">
+      <EntityTypeMapping TypeName="CarRentalEntitiesModel.admin">
+        <MappingFragment StoreEntitySet="admin">
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cars">
+      <EntityTypeMapping TypeName="CarRentalEntitiesModel.Car">
+        <MappingFragment StoreEntitySet="Cars">
+          <ScalarProperty Name="CarID" ColumnName="CarID" />
+          <ScalarProperty Name="CarName" ColumnName="CarName" />
+          <ScalarProperty Name="Available" ColumnName="Available" />
+          <ScalarProperty Name="PerDayCharge" ColumnName="PerDayCharge" />
+          <ScalarProperty Name="ChargePerKm" ColumnName="ChargePerKm" />
+          <ScalarProperty Name="CarType" ColumnName="CarType" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Costs">
+      <EntityTypeMapping TypeName="CarRentalEntitiesModel.Cost">
+        <MappingFragment StoreEntitySet="Cost">
+          <ScalarProperty Name="CostID" ColumnName="CostID" />
+          <ScalarProperty Name="RentID" ColumnName="RentID" />
+          <ScalarProperty Name="KmsCovered" ColumnName="KmsCovered" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Tax" ColumnName="Tax" />
+          <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="CarRentalEntitiesModel.Customer">
+        <MappingFragment StoreEntitySet="Customers">
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="LoyaltyPoints" ColumnName="LoyaltyPoints" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rentals">
+      <EntityTypeMapping TypeName="CarRentalEntitiesModel.Rental">
+        <MappingFragment StoreEntitySet="Rentals">
+          <ScalarProperty Name="RentID" ColumnName="RentID" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="CarID" ColumnName="CarID" />
+          <ScalarProperty Name="RentOrderDate" ColumnName="RentOrderDate" />
+          <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
+          <ScalarProperty Name="OdoReading" ColumnName="OdoReading" />
+          <ScalarProperty Name="ReturnOdoReading" ColumnName="ReturnOdoReading" />
+          <ScalarProperty Name="LicenseNumber" ColumnName="LicenseNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

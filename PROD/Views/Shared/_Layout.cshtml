@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Carzy</title>
+  
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+
+        body {
+            background-image: url(../images/car.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+
+
+        .navbar {
+            background-color: #020612;
+        }
+
+            .navbar a.nav-link {
+                color: #fff;
+            }
+
+
+        .navbar-brand h1 {
+            font-family: 'Arial', sans-serif;
+            font-size: 32px;
+            font-weight: bold;
+            color: #fff;
+            margin: 0;
+            padding: 10px 0;
+            margin-left: -60px;
+        }
+
+
+
+        .btn-get-car {
+            background-color: #007bff;
+            color: #fff;
+            font-size: 18px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><h1>Carzy</h1></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+
+                    <li class="nav-item">
+                        @Html.ActionLink("Admin", "AdminLogin", "Car", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+
+                    <li class="nav-item">
+                        @Html.ActionLink("CustomerLogin", "Login", "Customer", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    @if (Session["u"] != null)
+                    {
+
+                        <li>@Html.ActionLink("Logout", "preventBack", "Car", new { @class = "nav-link" })</li>
+
+                        <script type="text/javascript">
+                            function preventBack() { window.history.forward(); }
+                            setTimeout("preventBack()", 0);
+                            window.onunload = function () { null };
+                        </script>
+
+                    }
+                    @if (Session["u1"] != null)
+                    {
+                        <li>
+                            @Html.ActionLink("Logout", "preventBack", "Customer", new { @class = "nav-link" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("Profile", "Details", "Customer", new { @class = "nav-link" })
+
+                        </li>
+                        <script type="text/javascript">
+                            function preventBack() { window.history.forward(); }
+                            setTimeout("preventBack()", 0);
+                            window.onunload = function () { null };
+                        </script>
+                    }
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        @RenderBody()
+        <hr />
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+
+</body>
+</html>
+
+<script>
+    function getCar() {
+
+        window.location.href = 'Customer/Login';
+    }
+</script>
+
+
+
+
+

@@ -1,0 +1,61 @@
+﻿@model PROD.Models.RentModel
+
+@{
+    ViewBag.Title = "CancelRent";
+}
+
+<h2>CancelRent</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <div style="float:left">
+        <img src="@Url.Content(@ViewBag.image)" width:"100px" height:"200px">
+
+    </div>
+    <hr />
+    <div style="margin-left:600px">
+        <table class="table table-responsive table-striped">
+            <tbody>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.CustomerID)</td>
+                    <td>@Html.DisplayFor(model => model.CustomerID)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.CarID)</td>
+                    <td>@Html.DisplayFor(model => model.CarID)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.RentOrderDate)</td>
+                    <td>@Html.DisplayFor(model => model.RentOrderDate)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.ReturnDate)</td>
+                    <td>@Html.DisplayFor(model => model.ReturnDate)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.OdoReading)</td>
+                    <td>@Html.DisplayFor(model => model.OdoReading)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.ReturnOdoReading)</td>
+                    <td>@Html.DisplayFor(model => model.ReturnOdoReading)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.LicenseNumber)</td>
+                    <td>@Html.DisplayFor(model => model.LicenseNumber)</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Cancel" class="btn btn-danger" /> |
+            @Html.ActionLink("Back to List", "Search", null, new { @class = "btn btn-info btn-large" })
+        </div>
+    }
+    </div>
+</div>

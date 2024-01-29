@@ -1,0 +1,41 @@
+﻿@model IEnumerable<PROD.Models.RentModel>
+
+@{
+    ViewBag.Title = "Pastrentals";
+}
+
+<h2>Pastrentals</h2>
+
+<p>
+    @Html.ActionLink("Back to Search List", "Search", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.CustomerID)</th>
+            <th>@Html.DisplayNameFor(model => model.CarID)</th>
+            <th>@Html.DisplayNameFor(model => model.RentOrderDate)</th>
+            <th>@Html.DisplayNameFor(model => model.ReturnDate)</th>
+            <th>@Html.DisplayNameFor(model => model.OdoReading)</th>
+            <th>@Html.DisplayNameFor(model => model.ReturnOdoReading)</th>
+            <th>@Html.DisplayNameFor(model => model.LicenseNumber)</th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.CustomerID)</td>
+                <td>@Html.DisplayFor(modelItem => item.CarID)</td>
+                <td>@item.RentOrderDate.ToString("dd/MM/yyyy hh:mm tt")</td>
+                <td>@item.ReturnDate.ToString("dd/MM/yyyy hh:mm tt")</td>
+                <td>@Html.DisplayFor(modelItem => item.OdoReading)</td>
+                <td>@Html.DisplayFor(modelItem => item.ReturnOdoReading)</td>
+                <td>@Html.DisplayFor(modelItem => item.LicenseNumber)</td>
+                
+            </tr>
+        }
+    </tbody>
+</table>

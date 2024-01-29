@@ -1,0 +1,55 @@
+﻿
+@model IEnumerable<PROD.Models.CarModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style>
+        .card-img-top {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+    </style>
+
+</head>
+<body>
+    
+
+    <div class="row" style="margin-top:125px">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img class="card-img-top" src="@Url.Content(ViewBag.ImagePath + item.Photo)" alt="@item.CarName">
+                    
+
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.CarName)</h5>
+                        <p class="card-text">
+                            <strong>Available:</strong> @Html.DisplayFor(modelItem => item.Available) <br>
+                            <strong>Per Day Charge:</strong> @Html.DisplayFor(modelItem => item.PerDayCharge) <br>
+                            <strong>Charge Per Km:</strong> @Html.DisplayFor(modelItem => item.ChargePerKm) <br>
+                            <strong>Car Type:</strong> @Html.DisplayFor(modelItem => item.CarType)
+                        </p>
+                        @if (item.Available)
+                        {
+                        <a href="@Url.Action("Rent", "Customer", new { id = item.CarID })"  class="btn btn-primary">Rent</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <p class="mt-1">
+        @Html.ActionLink("Search Page", "Search", null, new { @class = "btn btn-primary " })
+    </p>
+</body>
+</html>

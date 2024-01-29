@@ -1,0 +1,85 @@
+﻿
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<style>
+    body {
+        background-image: url("https://wallpaperaccess.com/full/1706697.jpg");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100%100%;
+    }
+    .card {
+        display: none;
+        position: fixed;
+        top: 140px;
+        left: -10px;
+        width: 300px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        padding: 20px;
+        border-radius: 5px;
+        z-index: 1000;
+    }
+
+    .card-body {
+        margin-bottom: 200px;
+    }
+
+    .card-text {
+        font-family: Cambria;
+    }
+
+    .toggle-card-button {
+        position: fixed;
+        top: 90px;
+        left: 20px;
+        z-index: 1000;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        font-size: 24px;
+        line-height: 36px;
+        cursor: pointer;
+        transition: transform;
+    }
+
+    /* Style for the card */
+
+</style>
+<button class="toggle-card-button" id="toggleCardButton">&#9660;</button>
+<div class="card" style="width: 18rem" id="fixedCard">
+
+    <div class="card-body">
+        <h5 class="card-title">Looking for a Car Rental?</h5>
+        <p class="card-text">If you need a car for your journey, you've come to the right place. Our extensive fleet of vehicles is ready to serve you. Click the "Get Car" button below to reserve your car now!</p>
+        <button class="btn btn-get-car" onclick="getCar()">Get Car</button>
+    </div>
+</div>
+<script>
+// JavaScript to toggle the card
+    document.addEventListener('DOMContentLoaded', function () {
+        const toggleCardButton = document.getElementById('toggleCardButton');
+        const fixedCard = document.getElementById('fixedCard');
+
+        toggleCardButton.addEventListener('click', function () {
+            if (fixedCard.style.display === 'none') {
+                fixedCard.style.display = 'block';
+            } else {
+                fixedCard.style.display = 'none';
+            }
+        });
+
+        // Close the card when clicking anywhere outside of it
+        window.addEventListener('click', function (event) {
+            if (event.target !== toggleCardButton && event.target !== fixedCard && !fixedCard.contains(event.target)) {
+                fixedCard.style.display = 'none';
+            }
+        });
+    });</script>

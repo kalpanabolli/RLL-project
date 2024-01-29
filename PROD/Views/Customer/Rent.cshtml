@@ -1,0 +1,133 @@
+﻿@model PROD.Models.RentModel
+
+@{
+    ViewBag.Title = "Rent";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Rent</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .non-editable-box {
+            border: 1px solid #ccc;
+            padding: 5px;
+            display: inline-block;
+        }
+
+        .card-form {
+            margin:50px;
+            max-width: 300px;
+            max-height:fit-content ;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-2">
+        @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+        {
+            <div class="alert alert-danger">
+                @ViewBag.ErrorMessage
+            </div>
+        }
+    </div>
+
+
+    <div class="container mt-10">
+        <div class="row">
+            <!-- Image Section -->
+            <div class="col-md-6 text-center">
+
+                <img src="@Url.Content(@ViewBag.image)" style="height:400px;width:400px; margin-top:100px">
+
+            </div>
+            <!-- Form Section -->
+            <div class="col-md-5">
+                <div class="card card-form">
+                    <div class="card-header">
+                        Rent Car
+                    </div>
+                    <div class="card-body">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                <!-- CustomerID (Non-editable) -->
+                                <div class="form-group non-editable-box">
+                                    @Html.LabelFor(model => model.CustomerID, htmlAttributes: new { @class = "control-label" })
+                                    <div>
+                                        @Html.EditorFor(model => model.CustomerID, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+
+                                @{
+                                    DateTime rentDate = (DateTime)(Session["RentDate"] ?? DateTime.MinValue);
+                                    DateTime returnDate = (DateTime)(Session["ReturnDate"] ?? DateTime.MinValue);
+                                }
+
+                                <!-- CarID (Non-editable) -->
+                                <div class="form-group non-editable-box">
+                                    @Html.LabelFor(model => model.CarID, htmlAttributes: new { @class = "control-label" })
+                                    <div>
+                                        @Html.EditorFor(model => model.CarID, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+
+                                <!-- RentOrderDate (Non-editable) -->
+                                <div class="form-group non-editable-box">
+                                    <label class="control-label">Rent Order Date:</label>
+                                    <div>
+
+                                        @Html.EditorFor(model => model.RentOrderDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+
+                                <!-- ReturnDate (Non-editable) -->
+                                <div class="form-group non-editable-box">
+                                    <label class="control-label">Return Date:</label>
+                                    <div>
+
+                                        @Html.EditorFor(model => model.ReturnDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+
+
+                                <!-- LicenseNumber -->
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.LicenseNumber, htmlAttributes: new { @class = "control-label" })
+                                    <div>
+                                        @Html.EditorFor(model => model.LicenseNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.LicenseNumber, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div>
+                                    <input type="submit" value="Rent" class="btn btn-success" />
+                                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info ml-2" })
+
+                                </div>
+
+
+                            </div>
+
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+</body>
+</html>
+
+

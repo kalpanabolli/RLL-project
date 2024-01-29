@@ -1,0 +1,65 @@
+﻿@model PROD.Models.CustomerModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h2>Details</h2>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.CustomerName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.CustomerName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+    @*
+            <dt>
+                @Html.DisplayNameFor(model => model.Password)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Password)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ConfirmPassword)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ConfirmPassword)
+            </dd>
+    *@
+            <dt>
+                @Html.DisplayNameFor(model => model.LoyaltyPoints)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.LoyaltyPoints)
+            </dd>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Search", "Search", null, new { @class = "btn btn-primary btn-large" })
+        @Html.ActionLink("Edit", "Edit", new { id = Model.CustomerID }, new { @class = "btn btn-primary" })
+    </p>
+</body>
+</html>

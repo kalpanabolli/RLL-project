@@ -1,0 +1,84 @@
+﻿@model PROD.Models.CarModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.CarID)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CarName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CarName, new { htmlAttributes = new { @class = "form-control", placeholder = "enter carname" } })
+            @Html.ValidationMessageFor(model => model.CarName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CarType, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CarType, new { htmlAttributes = new { @class = "form-control", placeholder = "enter cartype" } })
+            @Html.ValidationMessageFor(model => model.CarType, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PerDayCharge, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.PerDayCharge, new { htmlAttributes = new { @class = "form-control", placeholder = "enter perdaycharge" } })
+            @Html.ValidationMessageFor(model => model.PerDayCharge, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ChargePerKm, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ChargePerKm, new { htmlAttributes = new { @class = "form-control", placeholder = "enter chargeperkm" } })
+            @Html.ValidationMessageFor(model => model.ChargePerKm, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Available, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.CheckBoxFor(model => model.Available)
+                @Html.LabelFor(model => model.Available)
+                @Html.ValidationMessageFor(model => model.Available, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Photo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Photo, new { htmlAttributes = new { @class = "form-control", placeholder = "enter Available" } })
+            @Html.ValidationMessageFor(model => model.Photo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group m-2 ">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-success " />
+        </div>
+    </div>
+    <div class="m-2 col-md-10">
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary btn-large" })
+    </div>
+</div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

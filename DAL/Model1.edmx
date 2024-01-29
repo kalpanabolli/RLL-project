@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CarRentalEntitiesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Cars">
+          <Key>
+            <PropertyRef Name="CarID" />
+          </Key>
+          <Property Name="CarID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CarName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Available" Type="bit" Nullable="false" />
+          <Property Name="PerDayCharge" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="ChargePerKm" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="CarType" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Photo" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Cost">
+          <Key>
+            <PropertyRef Name="CostID" />
+          </Key>
+          <Property Name="CostID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RentID" Type="int" Nullable="false" />
+          <Property Name="KmsCovered" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Tax" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="TotalCost" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LoyaltyPoints" Type="int" />
+        </EntityType>
+        <EntityType Name="Rentals">
+          <Key>
+            <PropertyRef Name="RentID" />
+          </Key>
+          <Property Name="RentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="CarID" Type="int" Nullable="false" />
+          <Property Name="RentOrderDate" Type="datetime" Nullable="false" />
+          <Property Name="ReturnDate" Type="datetime" Nullable="false" />
+          <Property Name="OdoReading" Type="int" />
+          <Property Name="ReturnOdoReading" Type="int" />
+          <Property Name="LicenseNumber" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Cost__RentID__403A8C7D">
+          <End Role="Rentals" Type="Self.Rentals" Multiplicity="1" />
+          <End Role="Cost" Type="Self.Cost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rentals">
+              <PropertyRef Name="RentID" />
+            </Principal>
+            <Dependent Role="Cost">
+              <PropertyRef Name="RentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rentals__CarID__3D5E1FD2">
+          <End Role="Cars" Type="Self.Cars" Multiplicity="1" />
+          <End Role="Rentals" Type="Self.Rentals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cars">
+              <PropertyRef Name="CarID" />
+            </Principal>
+            <Dependent Role="Rentals">
+              <PropertyRef Name="CarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rentals__Custome__3C69FB99">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="Rentals" Type="Self.Rentals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Rentals">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CarRentalEntitiesModelStoreContainer">
+          <EntitySet Name="admin" EntityType="Self.admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cars" EntityType="Self.Cars" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cost" EntityType="Self.Cost" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rentals" EntityType="Self.Rentals" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Cost__RentID__403A8C7D" Association="Self.FK__Cost__RentID__403A8C7D">
+            <End Role="Rentals" EntitySet="Rentals" />
+            <End Role="Cost" EntitySet="Cost" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rentals__CarID__3D5E1FD2" Association="Self.FK__Rentals__CarID__3D5E1FD2">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="Rentals" EntitySet="Rentals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rentals__Custome__3C69FB99" Association="Self.FK__Rentals__Custome__3C69FB99">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Rentals" EntitySet="Rentals" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CarRentalEntitiesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Car">
+          <Key>
+            <PropertyRef Name="CarID" />
+          </Key>
+          <Property Name="CarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CarName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Available" Type="Boolean" Nullable="false" />
+          <Property Name="PerDayCharge" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="ChargePerKm" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="CarType" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Photo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Rentals" Relationship="Self.FK__Rentals__CarID__3D5E1FD2" FromRole="Cars" ToRole="Rentals" />
+        </EntityType>
+        <EntityType Name="Cost">
+          <Key>
+            <PropertyRef Name="CostID" />
+          </Key>
+          <Property Name="CostID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RentID" Type="Int32" Nullable="false" />
+          <Property Name="KmsCovered" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Tax" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="TotalCost" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Rental" Relationship="Self.FK__Cost__RentID__403A8C7D" FromRole="Cost" ToRole="Rentals" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LoyaltyPoints" Type="Int32" />
+          <NavigationProperty Name="Rentals" Relationship="Self.FK__Rentals__Custome__3C69FB99" FromRole="Customers" ToRole="Rentals" />
+        </EntityType>
+        <EntityType Name="Rental">
+          <Key>
+            <PropertyRef Name="RentID" />
+          </Key>
+          <Property Name="RentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="CarID" Type="Int32" Nullable="false" />
+          <Property Name="RentOrderDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ReturnDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="OdoReading" Type="Int32" />
+          <Property Name="ReturnOdoReading" Type="Int32" />
+          <Property Name="LicenseNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Car" Relationship="Self.FK__Rentals__CarID__3D5E1FD2" FromRole="Rentals" ToRole="Cars" />
+          <NavigationProperty Name="Costs" Relationship="Self.FK__Cost__RentID__403A8C7D" FromRole="Rentals" ToRole="Cost" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__Rentals__Custome__3C69FB99" FromRole="Rentals" ToRole="Customers" />
+        </EntityType>
+        <Association Name="FK__Rentals__CarID__3D5E1FD2">
+          <End Role="Cars" Type="Self.Car" Multiplicity="1" />
+          <End Role="Rentals" Type="Self.Rental" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cars">
+              <PropertyRef Name="CarID" />
+            </Principal>
+            <Dependent Role="Rentals">
+              <PropertyRef Name="CarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cost__RentID__403A8C7D">
+          <End Role="Rentals" Type="Self.Rental" Multiplicity="1" />
+          <End Role="Cost" Type="Self.Cost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rentals">
+              <PropertyRef Name="RentID" />
+            </Principal>
+            <Dependent Role="Cost">
+              <PropertyRef Name="RentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Rentals__Custome__3C69FB99">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Rentals" Type="Self.Rental" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Rentals">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CarRentalEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="admins" EntityType="Self.admin" />
+          <EntitySet Name="Cars" EntityType="Self.Car" />
+          <EntitySet Name="Costs" EntityType="Self.Cost" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Rentals" EntityType="Self.Rental" />
+          <AssociationSet Name="FK__Rentals__CarID__3D5E1FD2" Association="Self.FK__Rentals__CarID__3D5E1FD2">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="Rentals" EntitySet="Rentals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cost__RentID__403A8C7D" Association="Self.FK__Cost__RentID__403A8C7D">
+            <End Role="Rentals" EntitySet="Rentals" />
+            <End Role="Cost" EntitySet="Costs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Rentals__Custome__3C69FB99" Association="Self.FK__Rentals__Custome__3C69FB99">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Rentals" EntitySet="Rentals" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CarRentalEntitiesModelStoreContainer" CdmEntityContainer="CarRentalEntities">
+          <EntitySetMapping Name="admins">
+            <EntityTypeMapping TypeName="CarRentalEntitiesModel.admin">
+              <MappingFragment StoreEntitySet="admin">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cars">
+            <EntityTypeMapping TypeName="CarRentalEntitiesModel.Car">
+              <MappingFragment StoreEntitySet="Cars">
+                <ScalarProperty Name="CarID" ColumnName="CarID" />
+                <ScalarProperty Name="CarName" ColumnName="CarName" />
+                <ScalarProperty Name="Available" ColumnName="Available" />
+                <ScalarProperty Name="PerDayCharge" ColumnName="PerDayCharge" />
+                <ScalarProperty Name="ChargePerKm" ColumnName="ChargePerKm" />
+                <ScalarProperty Name="CarType" ColumnName="CarType" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Costs">
+            <EntityTypeMapping TypeName="CarRentalEntitiesModel.Cost">
+              <MappingFragment StoreEntitySet="Cost">
+                <ScalarProperty Name="CostID" ColumnName="CostID" />
+                <ScalarProperty Name="RentID" ColumnName="RentID" />
+                <ScalarProperty Name="KmsCovered" ColumnName="KmsCovered" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="CarRentalEntitiesModel.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="LoyaltyPoints" ColumnName="LoyaltyPoints" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rentals">
+            <EntityTypeMapping TypeName="CarRentalEntitiesModel.Rental">
+              <MappingFragment StoreEntitySet="Rentals">
+                <ScalarProperty Name="RentID" ColumnName="RentID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="CarID" ColumnName="CarID" />
+                <ScalarProperty Name="RentOrderDate" ColumnName="RentOrderDate" />
+                <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
+                <ScalarProperty Name="OdoReading" ColumnName="OdoReading" />
+                <ScalarProperty Name="ReturnOdoReading" ColumnName="ReturnOdoReading" />
+                <ScalarProperty Name="LicenseNumber" ColumnName="LicenseNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

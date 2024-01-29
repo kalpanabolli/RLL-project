@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Successful";
+}
+
+<h2>Successful</h2>
+
+<div class="mx-0 w-100">
+    <div>
+        <h2>
+            <strong>Please Give your valuable Feedback</strong>
+        </h2>
+    </div>
+    <label for="customRange3" class="form-label">Car cleanliness and maintanance</label>
+    <div class="range">
+        <input type="range" class="form-range" min="0" max="6" step="1" id="customRange3" />
+    </div>
+    <label for="customRange3" class="form-label">Application Interface</label>
+    <div class="range">
+        <input type="range" class="form-range" min="0" max="6" step="1" id="customRange3" />
+    </div>
+    <label for="customRange3" class="form-label">Customer Support</label>
+    <div class="range">
+        <input type="range" class="form-range" min="0" max="6" step="1" id="customRange3" />
+    </div><br />
+    <div class="form-outline mb-4">
+        <textarea class="form-control" id="form4Example6" rows="4"></textarea>
+    </div>
+    <br />
+    <div class="text-end">
+        @Html.ActionLink("Submit", "preventBack", null, new { @class = "btn btn-info btn-large" })
+    </div>
+</div>
